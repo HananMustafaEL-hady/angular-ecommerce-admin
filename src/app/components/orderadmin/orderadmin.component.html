@@ -1,1 +1,37 @@
-<p>orderadmin works!</p>
+<div class="container">
+  <div class="row">
+    <div class="details">
+    <div class="col-sm" *ngFor="let property of orderadmin | keyvalue" >
+        <p class="price"><span>order status:{{property.value.order_status}}</span> </p>
+        <p class="price"><span>Order Placed date:{{property.value.Order_Placed_date}}</span> </p>
+        <p class="price"><span>order status:{{property.value.Order_delivered_date}}</span> </p>
+         <div class="col-sm"  *ngFor="let property2 of property.value.items| keyvalue" >
+          <p class="price"> <span>menu Name:{{property2.value.menuName}}</span></p>
+        <p class="price"> <span>count:{{property2.value.count}}</span></p>
+        <p class="price"> <span>price:{{property2.value.price}}</span></p>
+        {{property.value.userid}}
+
+</div>
+<div>
+  <button type="submit" (click)="getuser(property.value.userid)">user</button>
+
+</div>
+<form>
+  <div>
+    <select name="status" #status id="stauts">
+      <option value="accepted">accepted</option>
+      <option value="pending">pending</option>
+      <option value="rejected">rejected</option>
+    </select>
+    <button type="submit" (click)="statusedit(stauts.value)">status Edit</button>
+  </div>
+  <br>
+
+</form>
+ </div>
+        </div>
+
+      </div>
+
+
+</div>

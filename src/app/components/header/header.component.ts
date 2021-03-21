@@ -1,3 +1,4 @@
+import { getAttrsForDirectiveMatching } from '@angular/compiler/src/render3/view/util';
 import { Component, OnInit } from '@angular/core';
 import {AuthService} from '../auth/auth.service'
 
@@ -13,21 +14,31 @@ export class HeaderComponent implements OnInit {
   toggleNavbar() {
     this.navbarOpen = !this.navbarOpen;
   }
+
   constructor(private auth:AuthService) { }
 
   ngOnInit(): void {
+    this.isadmin=false;
+    this.admin() ;
   }
-  isadmin
+  logo:string = "assets/images/foodsto-logo-1.png"
+  isadmin:boolean;
 role;
 admin() {
 this.role=  this.auth.Getuserrole();
-if(this.role=="admin"){
-  return true;
+console.log(this.role);
+if(this.role=="user"){
+
+  this.isadmin=true;
+  return  this.isadmin;
 }
-else{ return  false;}
+else{
+  this.isadmin=true;
 
-
+  return  this.isadmin
+   ;}
   }
+
 
 
 

@@ -4,12 +4,22 @@ import { BehaviorSubject, from } from 'rxjs';
 import { User } from './user';
 import {HttpClient,HttpHeaders} from '@angular/common/http';
 import { map } from 'rxjs//operators';
+// const axios = require('axios').default;
 
 @Injectable()
 export class AuthService {
+  token=localStorage.getItem("token");
 
-  private URL_login="http://localhost:3000/users/login";
-  private URL_register="http://localhost:3000/users/";
+  httpOptionsEdit = {
+    headers: new HttpHeaders({
+      'Accept': 'text/html',
+      'Content-Type': 'application/json; charset=utf-8',
+      'Authorization':`${this.token}`
+    }),
+    responseType: 'text' as 'json'
+  };
+  private URL_login="https://restaurant98.herokuapp.com/admin/login";
+  private URL_register="https://restaurant98.herokuapp.com/admin";
    httpOptions = {
     headers: new HttpHeaders({
       'Accept': 'text/html',
@@ -25,7 +35,23 @@ export class AuthService {
     responseType: 'text' as 'json'
   };
 
-
+  httpOptions3 = {
+    headers: new HttpHeaders({
+      'Accept': 'text/html',
+      'Content-Type': 'application/json; charset=utf-8',
+      "Access-Control-Allow-Origin":"*",
+      'Authorization':`${this.token}`
+    }),
+    responseType: 'text' as 'json'
+   };
+   httpOptions4 = {
+    headers: new HttpHeaders({
+      'Accept': 'text/html',
+      'Content-Type': 'application/json; charset=utf-8',
+      'Authorization':`${this.token}`
+    }),
+    responseType: 'json' as 'json'
+   };
 register(user){
 
  return  this.http.post<any>(this.URL_register,user,this.httpOptions2)
@@ -63,8 +89,19 @@ register(user){
 PostMethod(url,data){
   return this.http.post(url,data,this.httpOptions2);
 }
+GetMethodauth(url){
+  return this.http.get<any>(url,this.httpOptions4);
+  }
 
 
+edit(url,id,name,data){
+  return this.http.patch(`${url}/${name}/${id}`,data,this.httpOptions3);
+}
+
+
+editauth(url,data){
+  return this.http.patch(url,data,this.httpOptionsEdit);
+}
 
   getToken(){
 
@@ -78,7 +115,6 @@ PostMethod(url,data){
     this.router.navigate(['/login']);
   }
 
-  token=localStorage.getItem("token");
   user=[{
 
     "address": "",
@@ -116,7 +152,8 @@ PostMethod(url,data){
     .subscribe(posts=>{
     console.log(posts);
     this.user= posts;
-    return this.user[0].role
+    console.log( this.user[0].role);
+    return this.user[0].role;
 
   });
 
@@ -128,3 +165,14 @@ PostMethod(url,data){
 
 
 }
+
+
+
+
+
+
+// const verifyUser = (code) => {
+//   return axios.get("http://localhost:3000/admin/login/confirm/" + code).then((response) => {
+//     return response.data;
+//   });
+// }

@@ -1,22 +1,28 @@
-<h1>Menu</h1>
 
-
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      dashboard
+      <i class="fas fa-carrot"></i>
+    </div>
+  </div>
+</div>
 
 
 <div class="container">
   <p class="text-center">
-    <button type="button" class="btn btn-outline-primary" (click)="isCollapsed = !isCollapsed"
+    <button type="button" class="btn-model" (click)="isCollapsed = !isCollapsed"
             [attr.aria-expanded]="!isCollapsed" aria-controls="collapseExample">
-            Add  Meal
+            Add  Meal <i class="fas fa-arrow-circle-down"></i>
     </button>
   </p>
-  <div id="collapseExample" [ngbCollapse]="isCollapsed">
-    <div class="card">
-      <div class="card-body" >
+  <div id="collapseExample" [ngbCollapse]="isCollapsed" class="mb-4 col-6 offset-3">
+    <div class="card ">
+      <div class="card-body " >
         <form class="row g-8 needs-validation" novalidate #register="ngForm">
-          <div class="col-md-7 position-relative">
+          <div class=" position-relative">
                 <label for="validationTooltip01" class="form-label" >Name</label>
-                <input type="text"  #name class="form-control" id="validationTooltip01" placeholder="Your name...." name="name" required minlength="3">
+                <input type="text"  #name class="form-control col-12" id="validationTooltip01" placeholder="Your name...." name="name" required minlength="3">
                 <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
 
                   <div *ngIf="name.errors.required">
@@ -30,10 +36,10 @@
 
               </div>
 
-              <div class="col-md-7 position-relative">
-                <label for="validationTooltipUsername" class="form-label">description</label>
+              <div class=" position-relative">
+                <label for="validationTooltipUsername" class="form-label">Description</label>
                 <div class="input-group has-validation">
-                  <input  name="description" #description type="text" class="form-control" id="validationTooltipUsername" aria-describedby="validationTooltipUsernamePrepend" required>
+                  <input  name="description" #description type="text" class="form-control col-12" id="validationTooltipUsername" aria-describedby="validationTooltipUsernamePrepend" required>
                   <div *ngIf="description.invalid && (description.dirty || description.touched)" class="alert alert-danger">
 
                     <div *ngIf="description.errors.required">
@@ -44,9 +50,9 @@
                 </div>
            </div>
 
-              <div class="col-md-7 position-relative">
+              <div class=" position-relative">
                 <label for="validationTooltip05" class="form-label">Price</label>
-                <input  type="number" name ="price" #price class="form-control" id="validationTooltip05" required >
+                <input  type="number" name ="price" #price class="form-control col-12" id="validationTooltip05" required >
                 <div *ngIf="price.invalid && (price.dirty || price.touched)" class="alert alert-danger">
 
                   <div *ngIf="age.errors.required">
@@ -59,8 +65,8 @@
                   </div>
               </div>
               <div class="col-6  text-center">
-                <button class="btn btn-primary" type="submit" (click)="onCreatePost(name.value,description.value,price.value)" (click)="isCollapsed = !isCollapsed"
-                [attr.aria-expanded]="!isCollapsed"  [disabled]="register.form.invalid">Add</button>
+                <button class="btn " type="submit" (click)="onCreatePost(name.value,description.value,price.value)" (click)="isCollapsed = !isCollapsed"
+                [attr.aria-expanded]="!isCollapsed"  [disabled]="register.form.invalid"><span>Add</span></button>
 
               </div>
             </form>
@@ -77,19 +83,19 @@
 
 
 <div class="row">
-  <div class="card col-4" style="margin-bottom: 10px;" *ngFor="let item of menueuser">
+  <div class="card offset-1 col-4" style="margin-bottom: 10px;" *ngFor="let item of menueuser">
     <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
 <div class="card-body">
     <ul class="list-group list-group-flush">
-      <li class="list-group-item">Name:{{item.name}}</li>
-      <li class="list-group-item">price:{{item.price}}</li>
-      <li class="list-group-item">Description:{{item.description}}</li>
+      <li class="list-group-item"><span>Name:</span>{{item.name}}</li>
+      <li class="list-group-item"><span>Price:</span>{{item.price}}</li>
+      <li class="list-group-item"><span>Description:</span>{{item.description}}</li>
       <li class="list-group-item">
-        <button class="btn btn-primary" type="submit" (click)="deleteMenu(item._id)">Delete</button>
+        <button class="btn-primary" type="submit" (click)="deleteMenu(item._id)">Delete</button>
       </li>
       <li class="list-group-item">
         <div id="collapseExample" [ngbCollapse]="isCollapsed2">
-          <div class="card">
+          <div class="card mb-3">
             <div class="card-body" >
 
               <form class="row g-8 needs-validation" novalidate #register="ngForm">
@@ -107,13 +113,13 @@
                     </div>
                     </div>
 
-      <button class="btn btn-primary" type="submit" (click)="editMenunPrice(price.value,item._id)" (click)="isCollapsed2 = !isCollapsed2"
+      <button class=" btn-primary" type="submit" (click)="editMenunPrice(price.value,item._id)" (click)="isCollapsed2 = !isCollapsed2"
       [attr.aria-expanded]="!isCollapsed2"  [disabled]="register.form.invalid2">edit Price</button>
     </li>
 
     <li class="list-group-item">
       <div id="collapseExample" [ngbCollapse]="isCollapsed3">
-        <div class="card">
+        <div class="card mb-3">
           <div class="card-body" >
 
             <form class="row g-8 needs-validation" novalidate #register="ngForm">
@@ -131,14 +137,14 @@
                   </div>
                   </div>
 
-    <button class="btn btn-primary" type="submit" (click)="editMenudescription(description.value,item._id)" (click)="isCollapsed3 = !isCollapsed3"
+    <button class=" btn-primary" type="submit" (click)="editMenudescription(description.value,item._id)" (click)="isCollapsed3 = !isCollapsed3"
     [attr.aria-expanded]="!isCollapsed3"  [disabled]="register.form.invalid2">Edit description</button>
   </li>
 
 
   <li class="list-group-item">
     <div id="collapseExample" [ngbCollapse]="isCollapsed4">
-      <div class="card">
+      <div class="card mb-3">
         <div class="card-body" >
 
           <form class="row g-8 needs-validation" novalidate #register="ngForm">
@@ -156,7 +162,7 @@
                 </div>
                 </div>
 
-  <button class="btn btn-primary" type="submit" (click)="editMenunName(name.value,item._id)" (click)="isCollapsed4 = !isCollapsed4"
+  <button class=" btn-primary" type="submit" (click)="editMenunName(name.value,item._id)" (click)="isCollapsed4 = !isCollapsed4"
   [attr.aria-expanded]="!isCollapsed4"  [disabled]="register.form.invalid2">Edit Name</button>
 </li>
 
@@ -167,22 +173,22 @@
 </div>
 
 
-<h1>Menu Offers</h1>
+<!-- <h1>Menu Offers</h1> -->
 
 <div class="container">
   <p class="text-center">
-    <button type="button" class="btn btn-outline-primary" (click)="isCollapsed6= !isCollapsed6"
+    <button type="button" class="btn-model" (click)="isCollapsed6= !isCollapsed6"
             [attr.aria-expanded]="!isCollapsed6" aria-controls="collapseExample">
-            Add  Meal  Offers
+            Add  Meal  Offers <i class="fas fa-arrow-circle-down"></i>
     </button>
   </p>
-  <div id="collapseExample" [ngbCollapse]="isCollapsed6">
+  <div id="collapseExample" [ngbCollapse]="isCollapsed6" class="col-6 offset-3 mb-4">
     <div class="card">
       <div class="card-body" >
         <form class="row g-8 needs-validation" novalidate #register="ngForm">
-          <div class="col-md-7 position-relative">
+          <div class=" position-relative">
                 <label for="validationTooltip01" class="form-label" >Name</label>
-                <input type="text"  #namef class="form-control" id="validationTooltip01" placeholder="Your name...." name="namef" required minlength="3">
+                <input type="text"  #namef class="form-control col-12" id="validationTooltip01" placeholder="Your name...." name="namef" required minlength="3">
                 <div *ngIf="namef.invalid && (namef.dirty || namef.touched)" class="alert alert-danger">
 
                   <div *ngIf="namef.errors.required">
@@ -196,10 +202,10 @@
 
               </div>
 
-              <div class="col-md-7 position-relative">
-                <label for="validationTooltipUsername" class="form-label">description</label>
+              <div class=" position-relative">
+                <label for="validationTooltipUsername" class="form-label">Description</label>
                 <div class="input-group has-validation">
-                  <input  name="descriptionf" #descriptionf type="text" class="form-control" id="validationTooltipUsername" aria-describedby="validationTooltipUsernamePrepend" required>
+                  <input  name="descriptionf" #descriptionf type="text" class="form-control col-12" id="validationTooltipUsername" aria-describedby="validationTooltipUsernamePrepend" required>
                   <div *ngIf="descriptionf.invalid && (descriptionf.dirty || descriptionf.touched)" class="alert alert-danger">
 
                     <div *ngIf="descriptionf.errors.required">
@@ -210,9 +216,9 @@
                 </div>
            </div>
 
-              <div class="col-md-7 position-relative">
+              <div class=" position-relative">
                 <label for="validationTooltip05" class="form-label">Price</label>
-                <input  type="number" name ="pricef" #pricef class="form-control" id="validationTooltip05" required >
+                <input  type="number" name ="pricef" #pricef class="form-control col-12" id="validationTooltip05" required >
                 <div *ngIf="pricef.invalid && (pricef.dirty || pricef.touched)" class="alert alert-danger">
 
                   <div *ngIf="pricef.errors.required">
@@ -226,7 +232,7 @@
               </div>
               <div class="col-6  text-center">
                 <button class="btn btn-primary" type="submit" (click)="onCreatePostOffers(namef.value,descriptionf.value,pricef.value)" (click)="isCollapsed6= !isCollapsed6"
-                [attr.aria-expanded]="!isCollapsed6"  [disabled]="register.form.invalid">Add</button>
+                [attr.aria-expanded]="!isCollapsed6"  [disabled]="register.form.invalid"><span>Add</span></button>
 
               </div>
             </form>
@@ -240,15 +246,15 @@
 
 
   <div class="row">
-    <div class="card col-4" style="margin-bottom: 10px;" *ngFor="let item of menueuserOffers">
+    <div class="card   offset-1 col-4" style="margin-bottom: 10px;" *ngFor="let item of menueuserOffers">
       <!-- <img class="card-img-top" src="..." alt="Card image cap"> -->
   <div class="card-body">
       <ul class="list-group list-group-flush">
-        <li class="list-group-item">Name:{{item.name}}</li>
-        <li class="list-group-item">price:{{item.price}}</li>
-        <li class="list-group-item">Description:{{item.description}}</li>
+        <li class="list-group-item"><span>Name:</span>{{item.name}}</li>
+        <li class="list-group-item"><span>Price:</span>{{item.price}}</li>
+        <li class="list-group-item"><span>Description:</span>{{item.description}}</li>
         <li class="list-group-item">
-          <button class="btn btn-primary" type="submit" (click)="deleteOfffers(item._id)">Delete</button>
+          <button class=" btn-primary" type="submit" (click)="deleteOfffers(item._id)">Delete</button>
         </li>
         <li class="list-group-item">
             <div class="card">
@@ -267,10 +273,10 @@
                       </div>
                       </div>
 
-        <button class="btn btn-primary" type="submit" (click)="editPriceOffers(price.value,item._id)" [disabled]="register.form.invalid2">edit Price</button>
+        <button class=" btn-primary" type="submit" (click)="editPriceOffers(price.value,item._id)" [disabled]="register.form.invalid2">Edit Price</button>
       </li>
 
-      <li class="list-group-item">
+      <li class="list-group-item ">
           <div class="card">
             <div class="card-body" >
 
@@ -288,7 +294,7 @@
                     </div>
                     </div>
 
-      <button class="btn btn-primary" type="submit" (click)="editDescriptionOffers(description.value,item._id)" [disabled]="register.form.invalid2">Edit description</button>
+      <button class=" btn-primary" type="submit" (click)="editDescriptionOffers(description.value,item._id)" [disabled]="register.form.invalid2">Edit description</button>
     </li>
 
 
@@ -309,7 +315,7 @@
                   </div>
 
                   </div>
-    <button class="btn btn-primary" type="submit" (click)="editMenunName(name.value,item._id)"[disabled]="register.form.invalid2">Edit Name</button>
+    <button class=" btn-primary" type="submit" (click)="editMenunName(name.value,item._id)"[disabled]="register.form.invalid2">Edit Name</button>
   </li>
 
 

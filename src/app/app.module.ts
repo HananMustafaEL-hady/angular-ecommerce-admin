@@ -26,16 +26,16 @@ import { from } from 'rxjs';
 import { AuthService } from './components/auth/auth.service';
 import { AuthGuard  } from './components/auth/auth.guard';
 import {TokenService} from './components/token.service';
-import { LogoutComponent } from './components/logout/logout.component'
+import { LogoutComponent } from './components/logout/logout.component';
 const appRoutes:Routes=[
-  {path:'',component:HomeComponent},
+  {path:'',component:LoginComponent},
   {path:'about',component:AboutComponent},
   {path:'profile/:id',component:ProfileComponent,
   canActivate:[AuthGuard]},
-  {path:'menu',component:MenuComponent},
-  {path:'cart',component:CartComponent,
-canActivate:[AuthGuard]
-},
+  // {path:'menu',component:MenuComponent},
+  // {path:'cart',component:CartComponent,
+// canActivate:[AuthGuard]
+// },
   {path:'login',component:LoginComponent},
   {path:'menuA',component:MenuadminComponent},
   {path:'orderA',component:OrderadminComponent},
@@ -52,7 +52,6 @@ canActivate:[AuthGuard]
     HeaderComponent,
     UsersComponent,
     RegisterComponent,
-    TableComponent,
     ErrorComponent,
     HomeComponent,
     MenuComponent,
@@ -76,11 +75,11 @@ canActivate:[AuthGuard]
 
   ],
   providers: [Storage,AuthService,AuthGuard,
-  // {
-  //   provide:HTTP_INTERCEPTORS,
-  //   useClass:TokenService,
-  //   multi:true
-  // }
+  {
+    provide:HTTP_INTERCEPTORS,
+    useClass:TokenService,
+    multi:true
+  }
 
 
 ],

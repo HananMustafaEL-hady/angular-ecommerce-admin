@@ -2,7 +2,10 @@ import { Component, OnInit ,Input} from '@angular/core';
 import {HttpClient,HttpHeaders} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs//operators';
-import {Router} from '@angular/router'
+import {Router} from '@angular/router';
+import { MessengerService } from 'src/app/services/messenger.service'
+import { WishlistService } from 'src/app/services/wishlist.service';
+
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +19,9 @@ import {Router} from '@angular/router'
 
 
 export class MenuComponent implements OnInit {
+
+  //@Input() productItem: Product
+  @Input() addedToWishlist: boolean;
 
   public isCollapsed = false;
   public isCollapsed2 = false;
@@ -35,10 +41,11 @@ export class MenuComponent implements OnInit {
 
 
   }
-  students=[];
-@Input('studentsLists') student;
 arr=[];
-  constructor(private http:HttpClient ,  private router:Router) { }
+  constructor(private http:HttpClient ,  private router:Router,
+    private msg: MessengerService,
+    private wishlistService: WishlistService
+    ) { }
   datamenu
 
   token=localStorage.getItem("token");
@@ -63,21 +70,31 @@ this.datamenu={
   price:price,
   description:description
 }
-this.http.post("http://localhost:3000/menu",this.datamenu,httpOptions).subscribe(posts=>{
+this.http.post("https://restaurant98.herokuapp.com/menu",this.datamenu,httpOptions).subscribe(posts=>{
   console.log(posts);
 });
 
 }
 
 
+handleAddToWishlist(id) {
+  this.wishlistService.addToWishlist(id).subscribe(() => {
+    this.addedToWishlist = true;
+  })
+}
 
 
+handleRemoveFromWishlist(id) {
+  this.wishlistService.removeFromWishlist(id).subscribe(() => {
+    this.addedToWishlist = false;
+  })
+}
 
 
 
 
 GetMenu(){
-  this.http.get<{name:string, price:number, description:string}>("http://localhost:3000/menu").pipe(
+  this.http.get<{name:string, price:number, description:string}>("https://restaurant98.herokuapp.com/menu").pipe(
     map(resDB=>{
     const arrposts:{name:string, price:number, description:string}[]=[];
 

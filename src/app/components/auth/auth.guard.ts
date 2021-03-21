@@ -18,7 +18,7 @@ constructor(private router: Router,
 
 canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | Observable<boolean> | Promise<boolean> {
   if(!this.authService.loggedin()){
-  this.router.navigate(['/register']);
+  this.router.navigate(['/login']);
             return false;
         }
         else{

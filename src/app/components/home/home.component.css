@@ -96,7 +96,7 @@ margin-top: 10px;
 }
 .section-three{
   background-color: #3bb77e;
-  height: 400px;
+
   margin-top: 20px;
 }
 .client{
@@ -112,6 +112,7 @@ margin-top: 10px;
   background-color: #fff;
   padding: 10px;
   transition: 1s all ease-in-out;
+  margin-bottom: 15px;
 }
 .div-client:hover{
   transition: 1s all ease-in-out;

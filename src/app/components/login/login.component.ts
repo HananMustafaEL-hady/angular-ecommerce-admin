@@ -133,7 +133,7 @@ this.auth.login(user).subscribe(
 res=>{console.log(res)
   this.user.push(res)
   localStorage.setItem("token", JSON.parse(this.user[0]).token);
-  this.router.navigate(['/menu']);
+  this.router.navigate(['/profile/1']);
 
     // localStorage.setItem("token",res.token);
 },

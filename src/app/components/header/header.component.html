@@ -1,4 +1,7 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg ">
+  <a class="navbar-brand" href="#">
+    <img [src]=logo>
+</a>
 
     <button class="navbar-toggler" type="button"
             (click)="toggleNavbar()">
@@ -13,14 +16,14 @@
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" routerLinkActive="text-warning"  routerLink="/profile/1">profile</a>
+          <a class="nav-link" routerLinkActive="text-warning"  routerLink="/profile/1">Dashboard</a>
         </li>
-
+<!--
           <li class="nav-item">
             <a class="nav-link" routerLinkActive="text-warning" routerLink="/menu">Menu</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLinkActive="text-warning" routerLink="/menuA">Menu Admin</a>
+            <a class="nav-link" routerLinkActive="text-warning"  *ngIf="isadmin" routerLink="/menuA">Menu Admin</a>
           </li>
 
           <li class="nav-item">
@@ -38,7 +41,7 @@
 
           <li class="nav-item">
             <a class="nav-link" routerLinkActive="text-warning" routerLink="/about">About</a>
-          </li>
+          </li> -->
           <ul class="navbar-nav">
             <a class="nav-link" routerLinkActive="text-warning" routerLink="/register">Create Account</a>
             <a class="nav-link" routerLinkActive="text-warning" routerLink="/login">Login</a>
