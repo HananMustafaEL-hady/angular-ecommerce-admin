@@ -2,7 +2,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-12">
-      dashboard
+      Dashboard
       <i class="fas fa-carrot"></i>
     </div>
   </div>
@@ -21,8 +21,10 @@
       <div class="card-body " >
         <form class="row g-8 needs-validation" novalidate #register="ngForm">
           <div class=" position-relative">
+
+
                 <label for="validationTooltip01" class="form-label" >Name</label>
-                <input type="text"  #name class="form-control col-12" id="validationTooltip01" placeholder="Your name...." name="name" required minlength="3">
+                <input type="text"  style="width: 200px;" #name class="form-control col-12" id="validationTooltip01" placeholder="Your name...." name="name" required minlength="3">
                 <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
 
                   <div *ngIf="name.errors.required">
@@ -39,7 +41,7 @@
               <div class=" position-relative">
                 <label for="validationTooltipUsername" class="form-label">Description</label>
                 <div class="input-group has-validation">
-                  <input  name="description" #description type="text" class="form-control col-12" id="validationTooltipUsername" aria-describedby="validationTooltipUsernamePrepend" required>
+                  <input  name="description" style="width: 200px;" #description type="text" class="form-control col-12" id="validationTooltipUsername" aria-describedby="validationTooltipUsernamePrepend" required>
                   <div *ngIf="description.invalid && (description.dirty || description.touched)" class="alert alert-danger">
 
                     <div *ngIf="description.errors.required">
@@ -52,7 +54,7 @@
 
               <div class=" position-relative">
                 <label for="validationTooltip05" class="form-label">Price</label>
-                <input  type="number" name ="price" #price class="form-control col-12" id="validationTooltip05" required >
+                <input  type="number" style="width: 200px;"name ="price" #price class="form-control col-12" id="validationTooltip05" required >
                 <div *ngIf="price.invalid && (price.dirty || price.touched)" class="alert alert-danger">
 
                   <div *ngIf="age.errors.required">
@@ -90,18 +92,34 @@
       <li class="list-group-item"><span>Name:</span>{{item.name}}</li>
       <li class="list-group-item"><span>Price:</span>{{item.price}}</li>
       <li class="list-group-item"><span>Description:</span>{{item.description}}</li>
+
+
+      <div>
+        <input class="choose-file " type="file" name="image" (change)="selectImage($event)" />
+        <div>
+          <button   class="upload btn-primary" type="submit" (click)="onSubmit(item._id)">Upload</button>
+        </div>
+      </div>
+      <br>
+
+
+
+
+<img src="https://restaurant98.herokuapp.com/upload/show/{{item.image}}">
+
+
       <li class="list-group-item">
         <button class="btn-primary" type="submit" (click)="deleteMenu(item._id)">Delete</button>
       </li>
-      <li class="list-group-item">
-        <div id="collapseExample" [ngbCollapse]="isCollapsed2">
-          <div class="card mb-3">
-            <div class="card-body" >
 
+      <li class="list-group-item">
+        <div id="collapseExample">
+          <div class="card mb-1">
+            <div class="card-body" >
               <form class="row g-8 needs-validation" novalidate #register="ngForm">
                 <div class="col-md-7 position-relative">
                       <label for="validationTooltip01" class="form-label" >Price</label>
-                      <input type="number"  #price class="form-control" id="validationTooltip01" placeholder="New price.." name="price" required minlength="2">
+                      <input type="number"  #price  id="validationTooltip01" placeholder="New price.." name="price" required minlength="2">
                       <div *ngIf="price.invalid && (price.dirty || price.touched)" class="alert alert-danger">
                         <div *ngIf="name.errors.required">
                           Price is required.
@@ -113,12 +131,11 @@
                     </div>
                     </div>
 
-      <button class=" btn-primary" type="submit" (click)="editMenunPrice(price.value,item._id)" (click)="isCollapsed2 = !isCollapsed2"
-      [attr.aria-expanded]="!isCollapsed2"  [disabled]="register.form.invalid2">edit Price</button>
+      <button class=" btn-primary" type="submit" (click)="editMenunPrice(price.value,item._id)"  [disabled]="register.form.invalid2">edit Price</button>
     </li>
 
     <li class="list-group-item">
-      <div id="collapseExample" [ngbCollapse]="isCollapsed3">
+      <div id="collapseExample" >
         <div class="card mb-3">
           <div class="card-body" >
 
@@ -137,13 +154,12 @@
                   </div>
                   </div>
 
-    <button class=" btn-primary" type="submit" (click)="editMenudescription(description.value,item._id)" (click)="isCollapsed3 = !isCollapsed3"
-    [attr.aria-expanded]="!isCollapsed3"  [disabled]="register.form.invalid2">Edit description</button>
+    <button class=" btn-primary" type="submit" (click)="editMenudescription(description.value,item._id)"  [disabled]="register.form.invalid2">Edit description</button>
   </li>
 
 
   <li class="list-group-item">
-    <div id="collapseExample" [ngbCollapse]="isCollapsed4">
+    <div id="collapseExample">
       <div class="card mb-3">
         <div class="card-body" >
 
@@ -162,8 +178,8 @@
                 </div>
                 </div>
 
-  <button class=" btn-primary" type="submit" (click)="editMenunName(name.value,item._id)" (click)="isCollapsed4 = !isCollapsed4"
-  [attr.aria-expanded]="!isCollapsed4"  [disabled]="register.form.invalid2">Edit Name</button>
+
+                <button class=" btn-primary" type="submit" (click)="editMenunName(name.value,item._id)" [disabled]="register.form.invalid2">Edit Name</button>
 </li>
 
 
@@ -171,6 +187,28 @@
   </div>
   </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 <!-- <h1>Menu Offers</h1> -->
@@ -262,8 +300,8 @@
                 <form class="row g-8 needs-validation" novalidate #register="ngForm">
                   <div class="col-md-7 position-relative">
                         <label for="validationTooltip01" class="form-label" >Price</label>
-                        <input type="number"  #price class="form-control" id="validationTooltip01" placeholder="New price.." name="price" required minlength="2">
-                        <div *ngIf="price.invalid && (price.dirty || price.touched)" class="alert alert-danger">
+                        <input type="number"  #priceoffers class="form-control" id="validationTooltip01" placeholder="New price.." name="price" required minlength="2">
+                        <div *ngIf="priceoffers.invalid && (priceoffers.dirty || priceoffers.touched)" class="alert alert-danger">
                           <div *ngIf="name.errors.required">
                             Price is required.
                           </div>
@@ -273,7 +311,7 @@
                       </div>
                       </div>
 
-        <button class=" btn-primary" type="submit" (click)="editPriceOffers(price.value,item._id)" [disabled]="register.form.invalid2">Edit Price</button>
+        <button class=" btn-primary" type="submit" (click)="editPriceOffers(priceoffers.value,item._id)" [disabled]="register.form.invalid2">Edit Price</button>
       </li>
 
       <li class="list-group-item ">
@@ -315,7 +353,7 @@
                   </div>
 
                   </div>
-    <button class=" btn-primary" type="submit" (click)="editMenunName(name.value,item._id)"[disabled]="register.form.invalid2">Edit Name</button>
+    <button class=" btn-primary" type="submit" (click)="editNameOffers(name.value,item._id)"[disabled]="register.form.invalid2">Edit Name</button>
   </li>
 
 

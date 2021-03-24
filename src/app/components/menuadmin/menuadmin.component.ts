@@ -36,8 +36,8 @@ export class MenuadminComponent implements OnInit {
       this.isCollapsed6= true
   }
   constructor(private http:HttpClient,private menu:AuthService ,  private router:Router) { }
-  urlMenu="http://localhost:3000/menu";
-  urlMenuOffers="http://localhost:3000/menuOffers";
+  urlMenu="https://restaurant98.herokuapp.com/menu";
+  urlMenuOffers="https://restaurant98.herokuapp.com/menuOffers";
    menueuser=[];
    datamenu
   token=localStorage.getItem("token");
@@ -131,14 +131,14 @@ onCreatePostOffers(name,description,price){
     price:price,
     description:description
   }
-  this.menu.PostMethod(this.urlMenuOffers,this.datamenu).subscribe(posts=>{
+  this.menu.PostMethod("https://restaurant98.herokuapp.com/menuOffers",this.datamenu).subscribe(posts=>{
       console.log(posts);
    });
   }
 
   menueuserOffers
   GetMenuOffers(){
-    this.menu.GetMethod(this.urlMenuOffers).pipe(
+    this.menu.GetMethod("https://restaurant98.herokuapp.com/menuOffers").pipe(
       map(resDB=>{
       const arrposts:{name:string, price:number, description:string}[]=[];
 
@@ -164,7 +164,7 @@ onCreatePostOffers(name,description,price){
 
   deleteOfffers(id){
     console.log(id);
-    this.http.delete(`${this.urlMenuOffers}/${id}`).subscribe(posts=>{
+    this.http.delete(`https://restaurant98.herokuapp.com/menuOffers/${id}`).subscribe(posts=>{
       console.log(posts);
     });
     }
@@ -195,7 +195,58 @@ onCreatePostOffers(name,description,price){
 
 
 
+/////////////////////////////////////////////
+img_upload;
+multipleImages = [];
+selectImage(event) {
+  // debugger;
+  if (event.target.files.length > 0) {
+     this.img_upload = event.target.files[0];
+   // console.log(file);
 
+  }
+}
+
+
+onSubmit(id){
+  // debugger;
+  const formData = new FormData();
+  formData.append('image', this.img_upload);
+
+  this.http.post<any>(`https://restaurant98.herokuapp.com/upload/product/${id}`, formData).subscribe(
+    res => {
+      // debugger;
+      console.log(res)
+    }
+
+
+  );
+}
+httpOptions = {
+  headers: new HttpHeaders({
+    'Accept': 'text/html',
+    'Content-Type': 'application/json; charset=utf-8',
+    'Authorization':`${this.token}`
+  }),
+  responseType: 'json' as 'json'
+};
+
+// Getimg(filename){
+//   this.http.get<any>(`https://restaurant98.herokuapp.com/upload/show/${filename}`,this.httpOptionsEdit).subscribe(
+//     res => {
+//       // debugger;
+//       console.log(res)
+//     },err=>{
+//       console.log(err)
+
+
+//     }
+
+
+//   );
+
+
+// }
 
 }
 

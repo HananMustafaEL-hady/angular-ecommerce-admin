@@ -14,23 +14,24 @@
       <div class="row gutters-sm mt-3">
           <div class="col-md-4 mb-3 ">
               <div class="card ">
-                  <div class="card-body">
-                      <div class="d-flex flex-column align-items-center text-center">
+                  <!-- <div class="card-body"> -->
+                      <!-- <div class="d-flex flex-column align-items-center text-center"> -->
 
-                          <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin"
-                              class="rounded-circle" width="150">
+                          <!-- <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin"
+                              class="rounded-circle" width="150"> -->
+
                               <!-- <form> -->
-                                <div>
-                                  <input type="file" name="image" (change)="selectImage($event)" />
+                                <!-- <div>
+                                  <input class="choose-file" type="file" name="image" (change)="selectImage($event)" />
                                 </div>
                                 <br>
                                 <div>
-                                  <button type="submit" (click)="onSubmit()">Upload</button>
-                                </div>
+                                  <button   class="upload" type="submit" (click)="onSubmit()">Upload</button>
+                                </div> -->
                               <!-- </form> -->
-                          <div class="mt-3">
+                          <!-- <div class="mt-3">
                               <h4 class="label">
-                                <span > {{user[0].firstName}} </span>   {{user[0].lastName}}
+                                <span> {{user[0].firstName}} </span>   {{user[0].lastName}}
 
                               </h4>
                           </div>
@@ -60,23 +61,21 @@
                           </div>
                           <div class="col-sm-9 text-secondary">
                             {{user[0].email}}                          </div>
-                      </div>
+                      </div> -->
 
-      <li class="list-group-item ">
+      <!-- <li class="list-group-item ">
         <div class="card">
           <div class="card-body" >
 
             <form class="row g-8 needs-validation" novalidate #register>
               <div class="col-md-7 position-relative">
-                    <label for="validationTooltip01" class="form-label" >Email</label>
                     <input type="text"  #email class="form-control"   name="email" >
-
                       </div>
                      </form>
                   </div>
                   </div>
 
-    <button class=" btn-primary" type="submit" (click)="editemail(email.value)">Edit Email</button>
+    <button class="upload" type="submit" (click)="editemail(email.value)">Edit Email</button>
   </li>
 
                       <hr>
@@ -112,7 +111,7 @@
                                       </div>
                                       </div>
 
-                        <button class=" btn-primary" type="submit" (click)="editaddress(address.value)">Edit address</button>
+                        <button class="upload" type="submit" (click)="editaddress(address.value)">Edit address</button>
                       </li>
                       </div>
                   </div>
@@ -128,7 +127,7 @@
           </div>
       </div>
   </div>
-</div>
+</div> -->
 <div class="row">
   <div class="col-4 offset-4">
 <button (click)="getmenu()" class="btn"><span>manage admin</span></button>
@@ -138,5 +137,10 @@
   <div class="col-4 offset-4">
 <button (click)="getorder()" class="btn"><span>order</span></button>
   </div>
+</div>
+<div class="row">
+  <!-- <div class="col-4 offset-4 mb-5">
+<button (click)="getlogout()" class="btn2"><span>logout</span></button>
+  </div> -->
 </div>
 

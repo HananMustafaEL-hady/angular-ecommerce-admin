@@ -1,9 +1,33 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit ,Input} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import {AuthService} from '../auth/auth.service'
 import {Router} from '@angular/router'
 import { map } from 'rxjs//operators';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
 import {HttpClient,HttpErrorResponse,HttpHeaders} from '@angular/common/http';
+@Component({
+  selector: 'ngbd-modal-content',
+  template: `
+    <div class="modal-header">
+      <h4 class="modal-title">The User</h4>
+      <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p> {{name}}</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+    </div>
+  `
+})
+export class NgbdModalContent {
+  @Input() name;
+
+  constructor(public activeModal: NgbActiveModal) {}
+}
 
 @Component({
   selector: 'app-orderadmin',
@@ -12,8 +36,11 @@ import {HttpClient,HttpErrorResponse,HttpHeaders} from '@angular/common/http';
 })
 export class OrderadminComponent implements OnInit {
 
+
+
   constructor(private formBuilder: FormBuilder,
-    private router:Router,private http:HttpClient,
+
+    private router:Router,private http:HttpClient,private modalService: NgbModal,
 
     private auth:AuthService) { }
 
@@ -26,27 +53,28 @@ export class OrderadminComponent implements OnInit {
   orderuser=[];
     orderadmin=[];
   getuser(id){
-    this.auth.GetMethodauth(`http://localhost:3000/admin/user/${id}`)
-    // .pipe(
-    //   map(resDB=>{
-    //     console.log(resDB)
-    //    const arrposts=[];
-    //     arrposts.push(...resDB);
-    //    return  arrposts;
+    this.auth.GetMethodauth(`https://restaurant98.herokuapp.com/users/${id}`)
+    .pipe(
+      map(resDB=>{
+        console.log(resDB)
+       const arrposts=[];
+        arrposts.push({...resDB});
+       return  arrposts;
 
-    //  }
-    //  ))
+     }
+     ))
      .subscribe(posts=>{
       console.log(posts);
       this.orderuser= posts;
       console.log(this.orderuser);
 
 
+
     }
     )
   }
   getorders(){
-    this.auth.GetMethodauth("http://localhost:3000/order/admin").pipe(
+    this.auth.GetMethodauth("https://restaurant98.herokuapp.com/order/admin").pipe(
       map(resDB=>{
        console.log(resDB)
       const arrposts=[];
@@ -54,12 +82,12 @@ export class OrderadminComponent implements OnInit {
       return  arrposts;
 
     }
+
     ))
     .subscribe(posts=>{
     console.log(posts);
     this.orderadmin= posts;
     console.log(this.orderadmin);
-
 
   }
   );
@@ -73,11 +101,52 @@ export class OrderadminComponent implements OnInit {
     }),
     responseType: 'text' as 'json'
   };
-  editstatus(value,id){
-    this.http.patch(`http://localhost:3000/order/s/${id}`,{value},this.httpOptionsEdit).subscribe(posts=>{
+
+
+  statusedit(order_status,id){
+    console.log(order_status);
+    console.log(id);
+    this.http.patch(`https://restaurant98.herokuapp.com/order/${id}`,{order_status}).subscribe(posts=>{
       console.log(posts);
     });
   }
 
+
+
+async open(id) {
+
+    // this.getuser(id)
+
+    this.auth.GetMethodauth(`https://restaurant98.herokuapp.com/users/${id}`)
+    .pipe(
+      map(resDB=>{
+        console.log(resDB)
+       const arrposts=[];
+        arrposts.push({...resDB});
+       return  arrposts;
+
+     }
+     ))
+     .subscribe(posts=>{
+      console.log(posts);
+      this.orderuser= posts;
+      console.log(this.orderuser);
+
+
+      const modalRef =  this.modalService.open(NgbdModalContent);
+      modalRef.componentInstance.name =  ` the name: ${this.orderuser[0].firstName +"   "+this.orderuser[0].lastName +"  "}
+
+    address :${this.orderuser[0].address +"   "}
+      `;
+
+    }
+    )
+// if(this.orderuser[0].firstName!=undefined){
+
+// }
+
   }
 
+  }
+
+;

@@ -14,7 +14,6 @@ import {AuthService} from '../auth/auth.service'
   providedIn: 'root'
 })
 
-
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -42,7 +41,7 @@ export class ProfileComponent implements OnInit {
 "gender": "",
 "lastName": ""
   }]
-  urlbase="http://localhost:3000/admin"
+  urladmin="https://restaurant98.herokuapp.com/admin"
 
   token=localStorage.getItem("token");
 
@@ -58,7 +57,7 @@ export class ProfileComponent implements OnInit {
     };
 
 
-    this.http.get(this.urlbase,httpOptions).pipe(
+    this.http.get(this.urladmin,httpOptions).pipe(
       map(resDB=>{
         console.log(resDB)
       const arrposts=[];
@@ -89,6 +88,8 @@ export class ProfileComponent implements OnInit {
 
   }
 
+  /////////////////////////////////////////////////////////////////////////////////////////
+
   preventBackButton() {
     history.pushState(null, null, location.href);
     this.location.onPopState(() => {
@@ -103,6 +104,10 @@ getmenu(){
 
 getorder(){
   this.router.navigate(['/orderA']);
+
+}
+getlogout(){
+  this.router.navigate(['/logoutA']);
 
 }
 
@@ -159,46 +164,23 @@ onSubmit(){
 
 
 
-urluser="http://localhost:3000/admin"
-// editName(data){
-//   this.auth.editauth(this.urluser,data).subscribe(posts=>{
-//     console.log(posts);
-//   });
-// }
 
-editphone(data){
-  this.auth.editauth("http://localhost:3000/admin/email/",data).subscribe(posts=>{
+
+editphone(phone){
+  this.auth.editauth(`https://restaurant98.herokuapp.com/phone/`,phone).subscribe(posts=>{
     console.log(posts);
   });
 }
 
 
 editemail(email){
-  // console.log(data);
-  // this.auth.editauth(this.urluser,"email",data).subscribe(posts=>{
-  //   console.log(posts);
-  // });
-
-    var headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Accept': 'text/html',
-        'Content-Type': 'application/json; charset=utf-8'
-      }),
-      responseType: 'text' as 'json'
-    };
-
-    this.http.patch("http://localhost:3000/admin/email/",{email:email},httpOptions).subscribe(posts=>{
-      console.log(posts);
-    });
+  this.auth.editauth('https://restaurant98.herokuapp.com/email/',email).subscribe(posts=>{
+    console.log(posts);
+  });
 }
 
-urladd="http://localhost:3000/admin/address";
-editaddress(data){
-
-  this.auth.editauth(this.urladd,data).subscribe(posts=>{
+editaddress(address){
+  this.auth.editauth(`${this.urladmin}/address/`,address).subscribe(posts=>{
     console.log(posts);
   });
 

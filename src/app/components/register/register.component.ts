@@ -80,7 +80,6 @@ export class RegisterComponent implements OnInit {
           console.log(res);
           this.user.push(res)
           localStorage.setItem("token", JSON.parse(this.user[0]).token);
-     this.router.navigate(['/menu']);
         },
         err=> {
           console.log(err);
